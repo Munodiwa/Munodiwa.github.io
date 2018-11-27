@@ -1,28 +1,35 @@
+Personal-Website
+Bootstrap version of my personal website. This is still in early development and more changes are to come.
 
+Get started
+Install node js on your machine
+cd to root directory, type "npm install" for dependencies
+type "npm run dev" to start the server
+Go to http://localhost:8080
+Main server file
+app.js
 
-## Download and Installation
+Routing
+All api requests go through /api/
 
-To begin using this template, choose one of the following options to get started:
-* [Download the latest release on Start Bootstrap](https://startbootstrap.com/template-overviews/resume/)
-* Install via npm: `npm i startbootstrap-resume`
-* Clone the repo
+All front end and static requests go through / (root)
 
-## Usage
+Meaning if you go to localhost:8080/software it will take you to the software page with html, css, javascript etc.. but if you go to localhost:8080/api/software it will not grab html.. the route assumes you are trying to access an api functionality
 
-### Basic Usage
+HTML Pages
+All html pages are in the /views/pages/ directory. These are ejs files which call partials in ejs to include html in other pages.
 
-After downloading, simply edit the HTML and CSS files included with the template in your favorite text editor to make changes. These are the only files you need to worry about, you can ignore everything else! To preview the changes you make to the code, you can open the `index.html` file in your web browser.
+Static Files (CSS, Javascript)
+/static/ directory
 
-### Advanced Usage
+When an html page links to a stylesheet or some script, express serves the Static files in the /static/ directory within the same direcory it is called inside of the /views/pages/ direcory.
 
-After installation, run `npm install` and then run `gulp dev` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `gulpfile.js` to see which tasks are included with the dev environment.
+For example:
 
-#### Gulp Tasks
+/views/pages/software/index.ejs has a stylesheet href="css/page.css"
 
-- `gulp` the default task that builds everything
-- `gulp dev` browserSync opens the project in your default browser and live reloads when changes are made
-- `gulp css` compiles SCSS files into CSS and minifies the compiled CSS
-- `gulp js` minifies the themes JS file
-- `gulp vendor` copies dependencies from node_modules to the vendor directory
+Since express serves our static files for us it actually grabs the css from
 
-You must have npm and Gulp installed globally on your machine in order to use these features.
+/static/software/css/page.css
+
+This makes it easy to use relative addresses in hrefs of html files, so long as you continue this directory structure of placing static files in /static directory and the html in the views/pages/ directory and the reusable html in the /views/partials/ directory
